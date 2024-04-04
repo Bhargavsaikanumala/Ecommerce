@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.ecommerce.Models.UserModel;
 import com.example.ecommerce.Services.UserService;
 
-
 @RestController
 
 public class UserController {
@@ -22,14 +21,12 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody UserModel user) {
         return userService.register(user);
-        
+
     }
 
     @GetMapping("/login/{username}")
-    public boolean auth(@PathVariable("username") String username,@RequestHeader String password) {      
-       return userService.authenticate(username,password);
+    public boolean auth(@PathVariable("username") String username, @RequestHeader String password) {
+        return userService.authenticate(username, password);
     }
-    
 
-    
 }
