@@ -1,7 +1,7 @@
 package com.example.ecommerce.Controller;
 
 import java.util.List;
-
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +26,17 @@ public class ProductController {
     @GetMapping("/view")
     public List<Product> getAllProducts() {
         return productRepository.findAll();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
+        Optional<Product> productOptional = productRepository.findById(id);
+        if (productOptional.isPresent()) {
+            productRepository.deleteById(id);
+            return new ResponseEntity<>("Product with ID " + id + " deleted successfully", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Product with ID " + id + " not found", HttpStatus.NOT_FOUND);
+        }
     }
 
 }
