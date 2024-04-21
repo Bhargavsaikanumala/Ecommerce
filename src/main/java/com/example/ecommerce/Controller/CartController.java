@@ -15,7 +15,7 @@ public class CartController {
     private CartService cartService;
 
     @PostMapping("cart/add")
-    public ResponseEntity<String> addToCart(@RequestParam Long productId, @RequestParam int quantity) {
+    public ResponseEntity<String> addToCart(@RequestBody Long productId, @RequestBody int quantity) {
         boolean success = cartService.addToCart(productId, quantity);
         if (success) {
             return ResponseEntity.ok("Product added to cart successfully.");
